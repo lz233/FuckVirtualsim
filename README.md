@@ -6,7 +6,7 @@ For MIUI in mainland China only.Crack the root detection of the virtualsim and h
 
 仅适用于中国大陆境内的MIUI系统。破解全球上网的root检测，隐藏一元流量的发现页面。
 ## Getting Started
-You can download apk files on [Xposed Module Repository](https://repo.xposed.info/module/com.lz233.fuckvirtualsim) or [Github](https://github.com/lz233/FuckVirtualsim/release)。
+You can download apk files on [Xposed Module Repository](https://repo.xposed.info/module/com.lz233.fuckvirtualsim) or [Github](https://github.com/lz233/FuckVirtualsim/releases).
 
 Install it, reboot your device and enjoy it!
 ## Build by yourself
