@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fuck 全球上网</string>
+    <string name="title_activity_setting">设置</string>
+    <string name="crack_root">破解Root验证</string>
+    <string name="re">打开应用信息页面</string>
+    <string name="re_text">手动停止应用来生效</string>
+    <string name="hide_discovery">隐藏一元流量的发现页面</string>
+</resources>
