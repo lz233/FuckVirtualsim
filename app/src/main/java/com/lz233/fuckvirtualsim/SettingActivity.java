@@ -1,6 +1,5 @@
 package com.lz233.fuckvirtualsim;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -128,7 +127,6 @@ public class SettingActivity extends Activity {
     /**
      * 设置状态栏透明
      */
-    @TargetApi(19)
     public static void setTranslucentStatus(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             //5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色
