@@ -7,9 +7,10 @@ android {
         minSdkVersion 21
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 22
-        versionCode 11
-        versionName '1.1'
+        versionCode 111
+        versionName '1.11'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        proguardFiles
     }
     buildTypes {
         release {
@@ -22,5 +23,4 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     compileOnly 'de.robv.android.xposed:api:82'
-
 }

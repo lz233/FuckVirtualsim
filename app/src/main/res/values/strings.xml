@@ -2,7 +2,9 @@
     <string name="app_name">Fuck Virtualsim</string>
     <string name="title_activity_setting">Setting</string>
     <string name="crack_root">Crack Root</string>
-    <string name="re">Open the app info page</string>
+    <string name="re">Manually stop</string>
     <string name="re_text">Manually stop the app to apply</string>
     <string name="hide_discovery">Hide the discovery tab of one yuan flow</string>
+    <string name="github_text">Browse this project on Github</string>
+    <string name="github">Open</string>
 </resources>

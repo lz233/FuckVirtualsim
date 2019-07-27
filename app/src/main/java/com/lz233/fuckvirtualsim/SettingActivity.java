@@ -1,54 +1,45 @@
 package com.lz233.fuckvirtualsim;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.ActivityManager;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.PreferenceFragment;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
-
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.RandomAccessFile;
-import java.lang.reflect.Method;
-import java.util.List;
 
 public class SettingActivity extends Activity {
     private Switch crack_root;
     private Switch hide_discovery;
-    private TextView re_text;
-    private Button re_butoon;
+    private LinearLayout re_linearlayout;
+    private Button re_button;
+    private Button github_button;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-        crack_root = (Switch) findViewById(R.id.crack_root);
-        hide_discovery = (Switch) findViewById(R.id.hide_discovery);
-        re_text = (TextView) findViewById(R.id.re_text);
-        re_butoon = (Button) findViewById(R.id.re_butoon);
-        //final SharedPreferences sharedPreferences = getSharedPreferences("setting",MODE_PRIVATE);
-        //Toast.makeText(this,ReadStringFromFile(Environment.getExternalStorageDirectory().toString()+"/Android/data/com.lz233.fuckvirtualsim/crack_root.txt"),Toast.LENGTH_SHORT).show();
+        //状态栏透明
+        setTranslucentStatus(this);
+        //状态栏icon黑色
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        //fb
+        crack_root = findViewById(R.id.crack_root);
+        hide_discovery = findViewById(R.id.hide_discovery);
+        re_button = findViewById(R.id.re_button);
+        re_linearlayout = findViewById(R.id.re_linearlayout);
+        github_button = findViewById(R.id.github_button);
+        //初始化
         if (ReadStringFromFile(Environment.getExternalStorageDirectory().toString()+"/Android/data/com.lz233.fuckvirtualsim/crack_root.txt").equals("0")) {
             crack_root.setChecked(false);
         }else {
@@ -59,6 +50,7 @@ public class SettingActivity extends Activity {
         }else {
             hide_discovery.setChecked(true);
         }
+        //监听器
         crack_root.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -71,8 +63,7 @@ public class SettingActivity extends Activity {
                     WriteStringToFile("0",Environment.getExternalStorageDirectory().toString()+"/Android/data/com.lz233.fuckvirtualsim/crack_root.txt");
                 }
                 //editor.commit();
-                re_text.setVisibility(View.VISIBLE);
-                re_butoon.setVisibility(View.VISIBLE);
+                re_linearlayout.setVisibility(View.VISIBLE);
             }
         });
         hide_discovery.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -83,11 +74,10 @@ public class SettingActivity extends Activity {
                 }else {
                     WriteStringToFile("0",Environment.getExternalStorageDirectory().toString()+"/Android/data/com.lz233.fuckvirtualsim/hide_discovery.txt");
                 }
-                re_text.setVisibility(View.VISIBLE);
-                re_butoon.setVisibility(View.VISIBLE);
+                re_linearlayout.setVisibility(View.VISIBLE);
             }
         });
-        re_butoon.setOnClickListener(new View.OnClickListener() {
+        re_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
@@ -95,6 +85,16 @@ public class SettingActivity extends Activity {
                 intent.setData(Uri.fromParts("package", "com.miui.virtualsim", null));
                 startActivity(intent);
 
+            }
+        });
+        github_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri = Uri.parse("https://github.com/lz233/FuckVirtualsim");
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                intent.setData(uri);
+                startActivity(intent);
             }
         });
     }
@@ -125,5 +125,31 @@ public class SettingActivity extends Activity {
         }
         return re;
     }
-
+    /**
+     * 设置状态栏透明
+     */
+    @TargetApi(19)
+    public static void setTranslucentStatus(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色
+            Window window = activity.getWindow();
+            View decorView = window.getDecorView();
+            //两个 flag 要结合使用，表示让应用的主体内容占用系统状态栏的空间
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+            //导航栏颜色也可以正常设置
+            //window.setNavigationBarColor(Color.TRANSPARENT);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window window = activity.getWindow();
+            WindowManager.LayoutParams attributes = window.getAttributes();
+            int flagTranslucentStatus = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+            attributes.flags |= flagTranslucentStatus;
+            //int flagTranslucentNavigation = WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
+            //attributes.flags |= flagTranslucentNavigation;
+            window.setAttributes(attributes);
+        }
+    }
 }
