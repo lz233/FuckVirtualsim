@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.lz233.fuckvirtualsim"
         minSdkVersion 21
         //noinspection ExpiredTargetSdkVersion
-        targetSdkVersion 22
-        versionCode 111
-        versionName '1.11'
+        targetSdkVersion 29
+        versionCode 1111
+        versionName '1.111'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         proguardFiles
     }

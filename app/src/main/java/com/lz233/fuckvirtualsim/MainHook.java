@@ -52,19 +52,6 @@ public class MainHook implements IXposedHookLoadPackage {
         field.setAccessible(true);
         return  (T) field.get(param.thisObject);
     }
-    //写数据到文件
-    private static void WriteStringToFile(String string,String path){
-        try {
-            FileOutputStream out = new FileOutputStream(path);
-            byte[] b = string.getBytes();
-            for (int i = 0; i < b.length; i++) {
-                out.write(b[i]);
-            }
-            out.close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
     //读数据
     private String ReadStringFromFile (String path) {
         String re = "";

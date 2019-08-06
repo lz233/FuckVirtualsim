@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 
@@ -56,10 +58,10 @@ public class SettingActivity extends Activity {
                 //SharedPreferences.Editor editor = sharedPreferences.edit();
                 if (b){
                     //editor.putBoolean("crack_root",true);
-                    WriteStringToFile("1",Environment.getExternalStorageDirectory().toString()+"/Android/data/com.lz233.fuckvirtualsim/crack_root.txt");
+                    WriteStringToFile("1",Environment.getExternalStorageDirectory().toString()+"/Android/data/com.lz233.fuckvirtualsim/","crack_root.txt");
                 }else {
                     //editor.putBoolean("crack_root",false);
-                    WriteStringToFile("0",Environment.getExternalStorageDirectory().toString()+"/Android/data/com.lz233.fuckvirtualsim/crack_root.txt");
+                    WriteStringToFile("0",Environment.getExternalStorageDirectory().toString()+"/Android/data/com.lz233.fuckvirtualsim/","crack_root.txt");
                 }
                 //editor.commit();
                 re_linearlayout.setVisibility(View.VISIBLE);
@@ -69,9 +71,9 @@ public class SettingActivity extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b){
-                    WriteStringToFile("1",Environment.getExternalStorageDirectory().toString()+"/Android/data/com.lz233.fuckvirtualsim/hide_discovery.txt");
+                    WriteStringToFile("1",Environment.getExternalStorageDirectory().toString()+"/Android/data/com.lz233.fuckvirtualsim/","hide_discovery.txt");
                 }else {
-                    WriteStringToFile("0",Environment.getExternalStorageDirectory().toString()+"/Android/data/com.lz233.fuckvirtualsim/hide_discovery.txt");
+                    WriteStringToFile("0",Environment.getExternalStorageDirectory().toString()+"/Android/data/com.lz233.fuckvirtualsim/","hide_discovery.txt");
                 }
                 re_linearlayout.setVisibility(View.VISIBLE);
             }
@@ -98,9 +100,13 @@ public class SettingActivity extends Activity {
         });
     }
     //写数据到文件
-    private static void WriteStringToFile(String string,String path){
+    private static void WriteStringToFile(String string,String path,String fileName){
         try {
-            FileOutputStream out = new FileOutputStream(path);
+            File file = new File(path);
+            if (!file.isDirectory()) {
+                file.mkdir();
+            }
+            FileOutputStream out = new FileOutputStream(path+fileName);
             byte[] b = string.getBytes();
             for (int i = 0; i < b.length; i++) {
                 out.write(b[i]);
