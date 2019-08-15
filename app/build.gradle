@@ -6,7 +6,7 @@ android {
         applicationId "com.lz233.fuckvirtualsim"
         minSdkVersion 21
         //noinspection ExpiredTargetSdkVersion
-        targetSdkVersion 29
+        targetSdkVersion 22
         versionCode 1111
         versionName '1.111'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
