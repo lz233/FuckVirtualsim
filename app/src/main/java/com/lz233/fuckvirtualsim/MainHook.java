@@ -25,6 +25,13 @@ public class MainHook implements IXposedHookLoadPackage {
             //Toast crack_root = Toast.makeText(this, String.valueOf(xSharedPreferences.getBoolean("crack_root", true)), Toast.LENGTH_SHORT).show();
             if (!ReadStringFromFile(Environment.getExternalStorageDirectory().toString()+"/Android/data/com.lz233.fuckvirtualsim/crack_root.txt").equals("0")) {
                 XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.RootUtil", lpparam.classLoader, "isDeviceRooted", XC_MethodReplacement.returnConstant(false));
+                XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "a", XC_MethodReplacement.returnConstant(false));
+                XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "b", XC_MethodReplacement.returnConstant(false));
+                XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "e", XC_MethodReplacement.returnConstant(false));
+                XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "f", XC_MethodReplacement.returnConstant(false));
+                XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "g", XC_MethodReplacement.returnConstant(false));
+                XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "c", XC_MethodReplacement.returnConstant(false));
+                XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "d", XC_MethodReplacement.returnConstant(false));
             }
             if (!ReadStringFromFile(Environment.getExternalStorageDirectory().toString()+"/Android/data/com.lz233.fuckvirtualsim/hide_discovery.txt").equals("0")) {
                 XposedHelpers.findAndHookMethod("com.miui.mimobile.ui.MmMainActivity", lpparam.classLoader,
