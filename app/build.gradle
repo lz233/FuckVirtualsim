@@ -3,12 +3,13 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 29
     defaultConfig {
+        Date date = new Date()
         applicationId "com.lz233.fuckvirtualsim"
         minSdkVersion 21
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 22
-        versionCode 1111
-        versionName '1.111'
+        versionCode = date.format("yyyyMMdd").toInteger()
+        versionName '1.2'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         proguardFiles
     }
