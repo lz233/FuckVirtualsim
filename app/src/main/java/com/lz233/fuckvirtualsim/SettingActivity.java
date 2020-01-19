@@ -1,7 +1,9 @@
 package com.lz233.fuckvirtualsim;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -29,7 +31,10 @@ public class SettingActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //int mode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        //setMiuiTheme(SettingActivity.this,0,mode);
         setContentView(R.layout.activity_setting);
+        ActionBar actionBar = getActionBar();
         //状态栏透明
         setTranslucentStatus(this);
         //状态栏icon黑色
@@ -130,9 +135,7 @@ public class SettingActivity extends Activity {
         }
         return re;
     }
-    /**
-     * 设置状态栏透明
-     */
+    //设置状态栏透明
     public static void setTranslucentStatus(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             //5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色
@@ -155,5 +158,15 @@ public class SettingActivity extends Activity {
             //attributes.flags |= flagTranslucentNavigation;
             window.setAttributes(attributes);
         }
+    }
+    //miui主题
+    public static void setMiuiTheme(Activity act, int overrideTheme,int isnightmode) {
+        int themeResId = 0;
+        try {
+            themeResId = act.getResources().getIdentifier("Theme.DayNight", "style", "miui");
+        } catch (Throwable t) {}
+        if (themeResId == 0) themeResId = act.getResources().getIdentifier((isnightmode == Configuration.UI_MODE_NIGHT_YES) ? "Theme.Dark" : "Theme.Light", "style", "miui");
+        act.setTheme(themeResId);
+        act.getTheme().applyStyle(overrideTheme, true);
     }
 }

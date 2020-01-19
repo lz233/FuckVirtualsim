@@ -24,29 +24,58 @@ public class MainHook implements IXposedHookLoadPackage {
             xSharedPreferences.reload();*/
             //Toast crack_root = Toast.makeText(this, String.valueOf(xSharedPreferences.getBoolean("crack_root", true)), Toast.LENGTH_SHORT).show();
             if (!ReadStringFromFile(Environment.getExternalStorageDirectory().toString()+"/Android/data/com.lz233.fuckvirtualsim/crack_root.txt").equals("0")) {
-                XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.RootUtil", lpparam.classLoader, "isDeviceRooted", XC_MethodReplacement.returnConstant(false));
-                XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "a", XC_MethodReplacement.returnConstant(false));
-                XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "b", XC_MethodReplacement.returnConstant(false));
-                XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "e", XC_MethodReplacement.returnConstant(false));
-                XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "f", XC_MethodReplacement.returnConstant(false));
-                XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "g", XC_MethodReplacement.returnConstant(false));
-                XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "c", XC_MethodReplacement.returnConstant(false));
-                XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "d", XC_MethodReplacement.returnConstant(false));
-                XposedHelpers.findAndHookMethod("com.miui.virtualsim.utils.ShellUtils", lpparam.classLoader, "a", XC_MethodReplacement.returnConstant(false));
+            //if (true) {
+                try {
+                    XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "a", XC_MethodReplacement.returnConstant(false));
+                    XposedHelpers.findAndHookMethod("com.miui.virtualsim.utils.ShellUtils", lpparam.classLoader, "a",String.class, XC_MethodReplacement.returnConstant(false));
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                try {
+                    XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.RootUtil", lpparam.classLoader, "isDeviceRooted", XC_MethodReplacement.returnConstant(false));
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                //XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "b", XC_MethodReplacement.returnConstant(false));
+                //XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "e", XC_MethodReplacement.returnConstant(false));
+                //XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "f", XC_MethodReplacement.returnConstant(false));
+                //XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "g", XC_MethodReplacement.returnConstant(false));
+                //XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "c", XC_MethodReplacement.returnConstant(false));
+                //XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "d", XC_MethodReplacement.returnConstant(false));
             }
-            if (!ReadStringFromFile(Environment.getExternalStorageDirectory().toString()+"/Android/data/com.lz233.fuckvirtualsim/hide_discovery.txt").equals("0")) {
+            //if (!ReadStringFromFile(Environment.getExternalStorageDirectory().toString()+"/Android/data/com.lz233.fuckvirtualsim/hide_discovery.txt").equals("0")) {
+            if (false) {
                 XposedHelpers.findAndHookMethod("com.miui.mimobile.ui.MmMainActivity", lpparam.classLoader,
                         "onCreate", Bundle.class,
                         new XC_MethodHook() {
                             @Override
                             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                                 //找到发现
-                                LinearLayout linearLayout = getHookView(param, "mFindTabView");
-                                // 设置属性,隐藏
-                                if (linearLayout != null) {
-                                    linearLayout.setVisibility(View.GONE);
+                                try {
+                                    LinearLayout linearLayout1 = getHookView(param, "mFindTabView");
+                                    if (linearLayout1 != null) {
+                                        linearLayout1.setVisibility(View.GONE);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
                                 }
-
+                            }
+                        }
+                );
+                XposedHelpers.findAndHookMethod("com.miui.mimobile.ui.MmMainActivity", lpparam.classLoader,
+                        "j", Bundle.class,
+                        new XC_MethodHook() {
+                            @Override
+                            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                                //找到发现
+                                try {
+                                    LinearLayout linearLayout1 = getHookView(param, "g");
+                                    //if (linearLayout1 != null) {
+                                        linearLayout1.setVisibility(View.GONE);
+                                    //}
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
                 );

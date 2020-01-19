@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SettingActivity"
-    android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     android:background="@android:color/white">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,16 +17,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
-            android:textColor="@android:color/black"
             android:textSize="40sp"
             android:textStyle="bold"
-            android:layout_margin="20dp"/>
+            android:layout_margin="20dp"
+            android:textColor="@android:color/black"/>
 
         <Switch
             android:id="@+id/crack_root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/crack_root"
+            android:textColor="@android:color/black"
             android:layout_margin="20dp"/>
 
         <Switch
@@ -35,7 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/hide_discovery"
-            android:layout_margin="20dp"/>
+            android:layout_margin="20dp"
+            android:visibility="visible"/>
 
         <LinearLayout
             android:id="@+id/re_linearlayout"
@@ -72,8 +73,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/github_text"
-                android:layout_weight="1"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black"
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/github_button"
@@ -84,4 +85,4 @@
                 android:layout_weight="0"/>
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</FrameLayout>

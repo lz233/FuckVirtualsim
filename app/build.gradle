@@ -9,15 +9,15 @@ android {
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 22
         versionCode = date.format("yyyyMMdd").toInteger()
-        versionName '1.2'
+        versionName '1.222'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         proguardFiles
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             zipAlignEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
