@@ -4,9 +4,10 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.LinearLayout;
-import java.io.FileOutputStream;
+
 import java.io.FileReader;
 import java.lang.reflect.Field;
+
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -17,23 +18,31 @@ public class MainHook implements IXposedHookLoadPackage {
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        if(lpparam.packageName.equals("com.miui.virtualsim")){
+        if (lpparam.packageName.equals("com.miui.virtualsim")) {
             /*File file = new File("/data/data/com.lz233.fuckvirtualsim/com.lz233.fuckvirtualsim/shared_prefs/setting.xml");
             final XSharedPreferences xSharedPreferences = new XSharedPreferences(file);
             xSharedPreferences.makeWorldReadable();
             xSharedPreferences.reload();*/
             //Toast crack_root = Toast.makeText(this, String.valueOf(xSharedPreferences.getBoolean("crack_root", true)), Toast.LENGTH_SHORT).show();
-            if (!ReadStringFromFile(Environment.getExternalStorageDirectory().toString()+"/Android/data/com.lz233.fuckvirtualsim/crack_root.txt").equals("0")) {
-            //if (true) {
+            if (!ReadStringFromFile(Environment.getExternalStorageDirectory().toString() + "/Android/data/com.lz233.fuckvirtualsim/crack_root.txt").equals("0")) {
+                //if (true) {
+                //5.7.4+
                 try {
-                    XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "a", XC_MethodReplacement.returnConstant(false));
-                    XposedHelpers.findAndHookMethod("com.miui.virtualsim.utils.ShellUtils", lpparam.classLoader, "a",String.class, XC_MethodReplacement.returnConstant(false));
+                    XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.n", lpparam.classLoader, "a", XC_MethodReplacement.returnConstant(false));
                 }catch (Exception e){
                     e.printStackTrace();
                 }
+                //5.6.x+
+                try {
+                    XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "a", XC_MethodReplacement.returnConstant(false));
+                    XposedHelpers.findAndHookMethod("com.miui.virtualsim.utils.ShellUtils", lpparam.classLoader, "a", String.class, XC_MethodReplacement.returnConstant(false));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //5.1.1+
                 try {
                     XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.RootUtil", lpparam.classLoader, "isDeviceRooted", XC_MethodReplacement.returnConstant(false));
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 //XposedHelpers.findAndHookMethod("com.miui.mimobile.utils.q", lpparam.classLoader, "b", XC_MethodReplacement.returnConstant(false));
@@ -71,7 +80,7 @@ public class MainHook implements IXposedHookLoadPackage {
                                 try {
                                     LinearLayout linearLayout1 = getHookView(param, "g");
                                     //if (linearLayout1 != null) {
-                                        linearLayout1.setVisibility(View.GONE);
+                                    linearLayout1.setVisibility(View.GONE);
                                     //}
                                 } catch (Exception e) {
                                     e.printStackTrace();
@@ -82,23 +91,25 @@ public class MainHook implements IXposedHookLoadPackage {
             }
         }
     }
+
     public static <T> T getHookView(XC_MethodHook.MethodHookParam param, String name) throws NoSuchFieldException, IllegalAccessException {
         Class clazz = param.thisObject.getClass();
         // 通过反射获取控件，无论private或者public
         Field field = clazz.getDeclaredField(name);
         field.setAccessible(true);
-        return  (T) field.get(param.thisObject);
+        return (T) field.get(param.thisObject);
     }
+
     //读数据
-    private String ReadStringFromFile (String path) {
+    private String ReadStringFromFile(String path) {
         String re = "";
         try {
             FileReader reader = new FileReader(path);
-            int ch ;
+            int ch;
             while ((ch = reader.read()) != -1) {
-                re = String.valueOf((char)ch);
+                re = String.valueOf((char) ch);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return re;

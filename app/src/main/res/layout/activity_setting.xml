@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:text="@string/hide_discovery"
             android:layout_margin="20dp"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/re_linearlayout"
